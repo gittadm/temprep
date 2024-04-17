@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lesson;
+use App\Models\Student;
 use Carbon\Carbon;
+use Faker\Factory;
 
 class LessonController extends Controller
 {
@@ -252,5 +254,106 @@ class LessonController extends Controller
         );
 
         dump($result);
+    }
+
+    public function queries()
+    {
+//        $student = Student::create(
+//            [
+//                'name' => 'Дмитрий',
+//                'surname' => 'Иванов',
+//                'middle_name' => 'Иванович',
+//                'year' => 2000,
+//                'description' => 'Что-то про Ивана',
+//            ]
+//        );
+
+//        $faker = Factory::create('ru_RU');
+//
+//        for ($i = 0; $i < 100; $i++) {
+//            Student::create(
+//                [
+//                    'name' => $faker->firstName,
+//                    'surname' => $faker->lastName,
+//                    'middle_name' => null,
+//                    'year' => $faker->year,
+//                    'description' => $faker->text,
+//                ]
+//            );
+//        }
+
+        // Получить всех студентов
+
+        // $students = Student::all();
+
+        // Получить студента, у которого id = 4
+
+        // $student = Student::find(4);
+
+        // Получить всех студентов с годом = 2000
+
+        // $students = Student::where('year', 2000)->get();
+
+        // Получить всех студентов с годом = 2000, отсортированных по фамилии
+
+        $students = Student::where('year', 2000)->orderBy('surname')->get();
+
+        // Получить всех студентов с годом = 2000, отсортированных по фамилии в обратном порядке
+
+        $students = Student::where('year', 2000)->orderBy('surname', 'desc')->get();
+
+        // Получить всех студентов с годом от 2000 до 2005 включительно, отсортированных по фамилии в обратном порядке
+
+        $students = Student::where('year', '>=', 2000)->where('year', '<=', 2005)
+            ->orderBy('surname', 'desc')->get();
+
+        // Получить первых 3 студента, которые с годом от 2000 до 2005 включительно,
+        // отсортированных по фамилии в обратном порядке
+
+        $students = Student::where('year', '>=', 2000)->where('year', '<=', 2005)
+            ->orderBy('surname', 'desc')->take(3)->get();
+
+        // Получить одного первого студента, которые с годом от 2000 до 2005 включительно,
+        // отсортированных по фамилии в обратном порядке
+
+        $student = Student::where('year', '>=', 2000)->where('year', '<=', 2005)
+            ->orderBy('surname', 'desc')->first();
+
+        // Получить всех студентов с годом не равным 2005, и у которых
+        // в фамилии есть фрагмент 'ано'
+
+        $students = Student::where('year', '<>', 2005)
+            ->where('surname', 'like', '%ано%')->get();
+
+        // Получить всех студентов с годом 2005 или 2007 или 2020
+
+        $students = Student::whereIn('year', [2005, 2007, 2020])->get();
+
+        // Получить всех студентов с годом 2005 или 2007 или большим 2020
+
+        $students = Student::where('year', 2005)->orWhere('year', 2007)
+            ->orWhere('year', '>', 2020) ->get();
+
+        // ->whereBetween('year', [2005, 2020])
+        // ->whereNotBetween('year', [2005, 2020])
+
+        // Получить студентов, у которых нет отчества
+
+        $students = Student::whereNull('middle_name')->orWhere('middle_name', '')->get();
+
+//        foreach ($students as $student) {
+//            if ($student->year > 2000) {
+//                dump($student);
+//            }
+//        }
+
+        //dd($students);
+
+        return view('students', compact('students'));
+
+        // return view('students', ['students' => $students]);
+
+        // compact('students', 'lessons')
+        // создасть такой массив ['students' => $students, 'lessons' => $lessons]
     }
 }

@@ -6,7 +6,7 @@
 </head>
 <body>
 @foreach($students as $student)
-    <p>{{ $student }}</p>
+    <p>{{ $student->id }} {{ $student->surname }} {{ $student->name }} {{ $student->year }}</p>
 @endforeach
 </body>
 </html>
