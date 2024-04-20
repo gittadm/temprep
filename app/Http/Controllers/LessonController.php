@@ -332,7 +332,7 @@ class LessonController extends Controller
         // Получить всех студентов с годом 2005 или 2007 или большим 2020
 
         $students = Student::where('year', 2005)->orWhere('year', 2007)
-            ->orWhere('year', '>', 2020) ->get();
+            ->orWhere('year', '>', 2020)->get();
 
         // ->whereBetween('year', [2005, 2020])
         // ->whereNotBetween('year', [2005, 2020])
@@ -348,6 +348,23 @@ class LessonController extends Controller
 //        }
 
         //dd($students);
+
+        // Год (был 2005 и цвет красный) или (от 2000 до 2003 и цвет зеленый)
+
+        // ->where()->where()->where() - и
+        // ->where()->orWhere->orWhere() - или
+
+        // анонимные функции
+        // function () {}
+
+        Student::where(function ($query) {
+            $query->where('year', 2005)
+                ->where('color', 'red');
+        })->orWhere(function ($query) {
+            $query->where('year', '>=', 2000)
+                ->where('year', '<=', 2003)
+                ->where('color', 'green');
+        })->get();
 
         return view('students', compact('students'));
 
