@@ -9,6 +9,26 @@ use Faker\Factory;
 
 class LessonController extends Controller
 {
+    public function lessons()
+    {
+        return view('lessons.lessons');
+    }
+
+    public function lesson1()
+    {
+        return view('lessons.lesson1');
+    }
+
+    public function lesson2()
+    {
+        return view('lessons.lesson2');
+    }
+
+    public function lesson3()
+    {
+        return view('lessons.lesson3');
+    }
+
     private function getCourses(): array
     {
         return [
