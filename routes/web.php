@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\FlexStartController;
 use App\Http\Controllers\LessonController;
+use App\Http\Controllers\QueryController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('lessons/add', [LessonController::class, 'add']);
@@ -16,3 +17,5 @@ Route::get('lessons/lesson2', [LessonController::class, 'lesson2'])->name('lesso
 Route::get('lessons/lesson3', [LessonController::class, 'lesson3'])->name('lessons.lesson3');
 
 Route::get('flexstart', [FlexStartController::class, 'index']);
+
+Route::get('queries/new', [QueryController::class, 'index']);
