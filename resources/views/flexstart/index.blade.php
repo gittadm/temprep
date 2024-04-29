@@ -1088,7 +1088,8 @@
                 </div>
 
                 <div class="col-lg-6">
-                    <form action="forms/contact.php" method="post" class="php-email-form">
+                    <form action="{{ route('flexstart.form') }}" method="post" class="php-email-form">
+                        @csrf
                         <div class="row gy-4">
 
                             <div class="col-md-6">
@@ -1096,15 +1097,15 @@
                             </div>
 
                             <div class="col-md-6 ">
-                                <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                                <input type="email" class="form-control" name="email" placeholder="Your Email" >
                             </div>
 
                             <div class="col-md-12">
-                                <input type="text" class="form-control" name="subject" placeholder="Subject" required>
+                                <input type="text" class="form-control" name="subject" placeholder="Subject" >
                             </div>
 
                             <div class="col-md-12">
-                                <textarea class="form-control" name="message" rows="6" placeholder="Message" required></textarea>
+                                <textarea class="form-control" name="message" rows="6" placeholder="Message" ></textarea>
                             </div>
 
                             <div class="col-md-12 text-center">
@@ -1221,7 +1222,6 @@
 <!-- Vendor JS Files -->
 <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.js') }}"></script>
 <script src="{{ asset('assets/vendor/aos/aos.js') }}"></script>
-<script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
 <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
 <script src="{{ asset('assets/vendor/purecounter/purecounter.js') }}"></script>
 <script src="{{ asset('assets/vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
