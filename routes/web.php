@@ -3,6 +3,7 @@
 use App\Http\Controllers\FlexStartController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\QueryController;
+use App\Http\Controllers\SessionCounterController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('lessons/add', [LessonController::class, 'add']);
@@ -21,3 +22,7 @@ Route::get('flexstart', [FlexStartController::class, 'index'])->name('flexstart.
 Route::get('queries/new', [QueryController::class, 'index']);
 
 Route::post('flexstart/form', [FlexStartController::class, 'form'])->name('flexstart.form');
+
+Route::get('session/counter', [SessionCounterController::class, 'index']);
+Route::get('session/task1', [SessionCounterController::class, 'task1'])->name('session.task1');
+Route::post('session/task1', [SessionCounterController::class, 'storeTask1'])->name('session.store.task1');
