@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\FlexStartController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\QueryController;
@@ -26,3 +27,10 @@ Route::post('flexstart/form', [FlexStartController::class, 'form'])->name('flexs
 Route::get('session/counter', [SessionCounterController::class, 'index']);
 Route::get('session/task1', [SessionCounterController::class, 'task1'])->name('session.task1');
 Route::post('session/task1', [SessionCounterController::class, 'storeTask1'])->name('session.store.task1');
+
+Route::get('cars', [CarController::class, 'index'])->name('cars.index');
+Route::get('cars/create', [CarController::class, 'create'])->name('cars.create');
+Route::post('cars/create', [CarController::class, 'store'])->name('cars.store');
+
+Route::get('cars/delete/{id}', [CarController::class, 'delete'])->name('cars.delete');
+
