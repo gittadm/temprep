@@ -16,6 +16,20 @@
     <h3 style="color: red; font-size: 28px;">{{ session('error') }}</h3> <br>
 @endif
 
+<form action="" method="get">
+    <input type="text"  style="display: inline-block;" name="text" value="{{ $text }}" placeholder="поиск по id, марки, вин ..." autocomplete="off">
+    <select name="year" style="display: inline-block;" autocomplete="off">
+        <option value="">Все годы</option>
+        @for($i = 1972; $i <= 2025; $i++)
+            <option value="{{ $i }}" @if($year == $i) selected @endif>Год {{ $i }}</option>
+        @endfor
+    </select>
+    <button type="submit">Найти</button>
+    <a href="{{ route('cars.index') }}">Сбросить</a>
+    <br><br>
+</form>
+
+
 <table>
     <tr>
         <td>ID</td>
@@ -53,6 +67,7 @@
     @endforeach
 </table>
 
+{{ $cars->appends(request()->input())->links('vendor.pagination.tailwind') }}
 
 </body>
 </html>

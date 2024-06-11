@@ -7,11 +7,33 @@ use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $cars = Car::orderBy('id', 'desc')->get();
+        //        if ($request->has('text')) {
+//           dd('yes');
+//        }
 
-        return view('cars.index', compact('cars'));
+        $text = trim($request->text);
+        $year = $request->year;
+
+        $cars = Car::query();
+
+        if (!empty($year)) {
+            $cars->where('year', $year);
+        }
+
+        if (!empty($text)) {
+            $cars->where(function ($query) use ($text) { // !!!!
+                $query->where('id', $text)
+                    ->orWhere('model', 'like', '%' . $text . '%')
+                    ->orWhere('mark', 'like', '%' . $text . '%')
+                    ->orWhere('vin', 'like', '%' . $text . '%');
+            });
+        }
+
+        $cars = $cars->orderBy('id', 'desc')->paginate(5);
+
+        return view('cars.index', compact('cars', 'year', 'text'));
     }
 
     public function create()
