@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CarStoreRequest;
+use App\Http\Requests\CarUpdateRequest;
 use App\Models\Car;
 use Illuminate\Http\Request;
 
@@ -23,12 +25,14 @@ class CarController extends Controller
         }
 
         if (!empty($text)) {
-            $cars->where(function ($query) use ($text) { // !!!!
-                $query->where('id', $text)
-                    ->orWhere('model', 'like', '%' . $text . '%')
-                    ->orWhere('mark', 'like', '%' . $text . '%')
-                    ->orWhere('vin', 'like', '%' . $text . '%');
-            });
+            $cars->where(
+                function ($query) use ($text) { // !!!!
+                    $query->where('id', $text)
+                        ->orWhere('model', 'like', '%' . $text . '%')
+                        ->orWhere('mark', 'like', '%' . $text . '%')
+                        ->orWhere('vin', 'like', '%' . $text . '%');
+                }
+            );
         }
 
         $cars = $cars->orderBy('id', 'desc')->paginate(5);
@@ -41,7 +45,7 @@ class CarController extends Controller
         return view('cars.create');
     }
 
-    public function store(Request $request)
+    public function store(CarStoreRequest $request)
     {
 //        Car::create(
 //            [
@@ -70,5 +74,50 @@ class CarController extends Controller
 
         return redirect()->route('cars.index')
             ->with(['error' => 'Авто № ' . $id . ' не найдено']);
+    }
+
+    public function edit(int $id)
+    {
+        $car = Car::find($id);
+
+        if ($car) {
+            return view('cars.edit', compact('car'));
+        }
+
+        return redirect()->route('cars.index')
+            ->with(['error' => 'Авто № ' . $id . ' не найдено']);
+    }
+
+    public function update(int $id, CarUpdateRequest $request)
+    {
+// 1 способ сохранить изменения авто
+//        $car = Car::find($id);
+//
+//        if (!$car) {
+//            return redirect()->route('cars.index')
+//                ->with(['error' => 'Авто № ' . $id . ' не найдено']);
+//        }
+//
+//        $car->mark = $request->mark;
+//        $car->model = $request->model;
+//        $car->year = $request->year;
+//        $car->description = $request->description;
+//
+//        $car->save();
+// 2 способ сохранить изменения авто
+
+//        Car::where('id', $id)->update(
+//            [
+//                'mark' => $request->mark,
+//                'model' => $request->model,
+//            ]
+//        );
+
+        // $request->validated() !!!
+
+        Car::where('id', $id)->update($request->except('_token'));
+
+        return redirect()->route('cars.index')
+            ->with(['success' => 'Авто № ' . $id . ' успешно изменено']);
     }
 }

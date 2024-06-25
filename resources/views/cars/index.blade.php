@@ -61,7 +61,7 @@
             <td>{{ $car->year }}</td>
             <td>{{ \Illuminate\Support\Str::limit($car->description, 20) }}</td>
             <td>{{ $car->created_at }}</td>
-            <td><button>Редактировать</button></td>
+            <td><a href="{{ route('cars.edit', [$car->id]) }}">Редактировать</a></td>
             <td><a href="{{ route('cars.delete', [$car->id]) }}">Удалить</a></td>
         </tr>
     @endforeach
