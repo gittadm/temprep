@@ -1,0 +1,21 @@
+h1 {
+    color: red;
+    font-size: 12px;
+}
+
+.main {
+    color: #0c4128;
+    font-size: 40px;
+}
+
+.strict {
+    font-weight: 300;
+}
+
+#block {
+    color: rgb(20, 200, 40);
+}
+
+.abc {
+    text-transform: capitalize;
+}

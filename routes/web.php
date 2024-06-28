@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\CssController;
 use App\Http\Controllers\FlexStartController;
 use App\Http\Controllers\LessonController;
 use App\Http\Controllers\QueryController;
@@ -37,3 +38,4 @@ Route::get('cars/delete/{id}', [CarController::class, 'delete'])->name('cars.del
 Route::get('cars/edit/{id}', [CarController::class, 'edit'])->name('cars.edit');
 Route::post('cars/edit/{id}', [CarController::class, 'update'])->name('cars.update');
 
+Route::get('css', [CssController::class, 'index'])->name('css.index');
