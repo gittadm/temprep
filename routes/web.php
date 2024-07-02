@@ -39,3 +39,5 @@ Route::get('cars/edit/{id}', [CarController::class, 'edit'])->name('cars.edit');
 Route::post('cars/edit/{id}', [CarController::class, 'update'])->name('cars.update');
 
 Route::get('css', [CssController::class, 'index'])->name('css.index');
+
+Route::get('lesson02-07', [CssController::class, 'lesson0207']);
