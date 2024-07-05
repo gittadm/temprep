@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AdminProfileController;
+use App\Http\Controllers\AdminUsersController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CssController;
 use App\Http\Controllers\FlexStartController;
@@ -41,3 +43,6 @@ Route::post('cars/edit/{id}', [CarController::class, 'update'])->name('cars.upda
 Route::get('css', [CssController::class, 'index'])->name('css.index');
 
 Route::get('lesson02-07', [CssController::class, 'lesson0207']);
+
+Route::get('admin/profile', [AdminProfileController::class, 'profile'])->name('admin.profile');
+Route::get('admin/users', [AdminUsersController::class, 'index'])->name('admin.users.index');
