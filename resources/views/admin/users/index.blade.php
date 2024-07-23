@@ -13,6 +13,11 @@
                         <div class="card-body">
                             <a href="#" class="btn btn-outline-primary waves-effect">Новый пользователь</a>
 
+                            <div class="row mt-2">
+                                <div class="col-12">
+                                    @includeIf('admin.users.filter')
+                                </div>
+                            </div>
 
                             <div class="table-responsive">
                                 <table class="table table-striped">
@@ -27,21 +32,23 @@
                                     </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach($users as $user)
                                         <tr>
                                             <td>
-                                                12
+                                                {{ $user->id }}
                                             </td>
-                                            <td>Иванов Петр</td>
+                                            <td>{{ $user->name }}</td>
                                             <td>
-                                                abc@email.ru
+                                                {{ $user->email }}
                                             </td>
-                                            <td><span class="badge rounded-pill badge-success me-1">Активный</span></td>
-                                            <td>11.12.24 12:30</td>
+                                            <td><span class="badge rounded-pill badge-success me-1">{{ $user->status }}</span></td>
+                                            <td>{{ $user->created_at }}</td>
                                             <td>
                                                 <button type="button" class="btn btn-outline-dark btn-sm waves-effect">Редактировать</button>
                                                 <a href="#" class="btn btn-outline-danger btn-sm waves-effect">Удалить</a>
                                             </td>
                                         </tr>
+                                        @endforeach
                                     </tbody>
                                     <tfoot>
                                     <tr>
