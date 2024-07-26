@@ -24,7 +24,7 @@
                     <button class="btn btn-default btn-outline" title="Применить фильтр" style="width: 20%;" type="submit">
                         <i class="fa fa-search"></i>
                     </button>
-                    <a href="{{ route('admin.users.index') }}"
+                    <a href="{{ route('admin.users.index.reset') }}"
                        class="btn btn-default btn-outline ml-2" title="Сбросить фильтр">
                         <i class="fa fa-eraser"></i>
                     </a>

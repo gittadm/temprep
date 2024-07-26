@@ -46,3 +46,4 @@ Route::get('lesson02-07', [CssController::class, 'lesson0207']);
 
 Route::get('admin/profile', [AdminProfileController::class, 'profile'])->name('admin.profile');
 Route::get('admin/users', [AdminUsersController::class, 'index'])->name('admin.users.index');
+Route::get('admin/users/reset/filter', [AdminUsersController::class, 'resetFilter'])->name('admin.users.index.reset');
